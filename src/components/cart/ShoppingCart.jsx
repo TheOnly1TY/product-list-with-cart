@@ -1,6 +1,7 @@
 import { AddedItems } from './AddedItems';
 import { CartCarbonNeutralMessage } from './CartCarbonNeutralMessage';
 import { EmptyCart } from './EmptyCart';
+import { OrderButton } from '../OrderButton';
 import { TotalPriceOrdered } from './TotalPriceOrdered';
 
 export function ShoppingCart() {
@@ -25,18 +26,7 @@ function CartItems() {
     <>
       <TotalPriceOrdered />
       <CartCarbonNeutralMessage />
-
-      {/* Reuseability */}
       <OrderButton>Confirm Order</OrderButton>
     </>
-  );
-}
-
-// trying to fix why the children prop doesn't work😢
-function OrderButton({ children }) {
-  return (
-    <button className="w-full h-[53px] text-base text-center text-white bg-[#C73B0F] rounded-full duration-100 cursor-pointer hover:bg-[#952c0b]">
-      {children}
-    </button>
   );
 }

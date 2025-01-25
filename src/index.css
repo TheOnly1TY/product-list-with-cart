@@ -6,3 +6,9 @@ body {
   font-family: 'Red Hat Text', serif;
   background-color: #fcf8f6;
 }
+
+.addBtnStyles {
+  background-color: white;
+  border: 1px solid #c73b0f;
+  cursor: pointer;
+}
