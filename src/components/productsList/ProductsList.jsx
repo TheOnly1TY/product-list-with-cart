@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Product } from './Product';
-import Productdata from '/public/data.json';
+import Productdata from '../data.json';
 import { ProductDescription } from './ProductDescription';
 
 export function ProductsList() {
@@ -43,9 +43,9 @@ function ProductImageWithButton({ product }) {
 }
 function AddToCartButton() {
   return (
-    <div className="flex justify-center items-center w-full h-full g-[4px]">
+    <div className="flex justify-center items-center w-full h-full gap-0.5">
       <img src="/images/icon-add-to-cart.svg" alt="add-to-cart_icon" />
-      <p className="text-base text-[#260F08] font-semibold">Add to cart</p>
+      <p className="text-sm text-primary font-semibold">Add to cart</p>
     </div>
   );
 }

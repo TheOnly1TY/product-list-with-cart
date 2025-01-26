@@ -1,3 +1,3 @@
 export function Product({ children }) {
-  return <div>{children}</div>;
+  return <div className="mb-6">{children}</div>;
 }
