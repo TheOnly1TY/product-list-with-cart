@@ -16,7 +16,7 @@ export function AddedItems() {
           <img src="images/icon-remove-item.svg" alt="remove item icon" />
         </figure>
       </div>
-      <div className="line"></div>
+      <div className="line mt-4"></div>
     </>
   );
 }

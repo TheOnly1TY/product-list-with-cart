@@ -12,6 +12,10 @@ body {
   background-color: #fcf8f6;
 }
 
+.circle {
+  @apply grid place-content-center w-5 h-5 border border-white rounded-full cursor-pointer;
+}
+
 .addBtnStyles {
   background-color: white;
   border: 1px solid #c73b0f;

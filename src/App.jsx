@@ -5,7 +5,7 @@ import { ShoppingCart } from './components/cart/ShoppingCart';
 export default function App() {
   return (
     <>
-      <div className="flex flex-col m-6">
+      <div className="flex flex-col m-6 lg:flex-row lg:items-start lg:my-[5.5rem] md:mx-10 md:gap-8">
         <div>
           <LogoName />
           <ProductsList />
