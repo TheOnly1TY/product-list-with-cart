@@ -28,7 +28,7 @@ function ProductReviewModal({ modalProduct }) {
             </div>
           </div>
         </div>
-        <p>$5.50</p>
+        <p>${(price * quantity).toFixed(2)}</p>
       </div>
       <div className="line my-4"></div>
     </>

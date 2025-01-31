@@ -18,7 +18,9 @@ function CartProduct({ addedProduct }) {
             {name}
           </h3>
           <p className="text-sm">
-            <span className="text-[#C73B0F] font-bold mr-2.5">1x</span>
+            <span className="text-[#C73B0F] font-bold mr-2.5">
+              {addedProduct.quantity}x
+            </span>
             <span className="text-[#87635A] mr-1.5">@ ${price.toFixed(2)}</span>
             <span className="text-[#87635A] font-bold">
               ${(quantity * price).toFixed(2)}

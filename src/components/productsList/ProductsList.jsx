@@ -3,7 +3,7 @@ import { Product } from './Product';
 import Productdata from '../data.json';
 import { ProductDescription } from './ProductDescription';
 
-export function ProductsList({ addProduct }) {
+export function ProductsList({ addProduct, updateProductQuantity }) {
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
     setAllProducts(Productdata);
@@ -13,7 +13,11 @@ export function ProductsList({ addProduct }) {
     <div className="max-w-full md:grid md:grid-cols-3 md:gap-x-6 md:gap-y-8">
       {allProducts.map((product, i) => (
         <Product key={i}>
-          <ProductImageWithButton product={product} addProduct={addProduct} />
+          <ProductImageWithButton
+            product={product}
+            addProduct={addProduct}
+            updateProductQuantity={updateProductQuantity}
+          />
           <ProductDescription product={product} />
         </Product>
       ))}
@@ -21,7 +25,11 @@ export function ProductsList({ addProduct }) {
   );
 }
 
-function ProductImageWithButton({ product, addProduct }) {
+function ProductImageWithButton({
+  product,
+  addProduct,
+  updateProductQuantity,
+}) {
   const [displayCounter, setDisplayCounter] = useState(false);
   function handleCounterDisplay() {
     setDisplayCounter(true);
@@ -42,7 +50,14 @@ function ProductImageWithButton({ product, addProduct }) {
         onClick={handleCounterDisplay}
         className={`absolute top-full left-1/2 transform translate-[-50%] w-40 h-[2.75rem] rounded-full ${!displayCounter ? 'addBtnStyles' : 'bg-[#C73B0F]'}`}
       >
-        {displayCounter ? <CounterButton /> : <AddToCartButton />}
+        {displayCounter ? (
+          <CounterButton
+            product={product}
+            updateProductQuantity={updateProductQuantity}
+          />
+        ) : (
+          <AddToCartButton />
+        )}
       </button>
     </div>
   );
@@ -56,8 +71,12 @@ function AddToCartButton() {
   );
 }
 
-function CounterButton() {
+function CounterButton({ product, updateProductQuantity }) {
   const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    updateProductQuantity(product.name, count);
+  }, [count]);
 
   // fixing issues of working changing the state back to false after 1
   const handleDecrementCount = () => {

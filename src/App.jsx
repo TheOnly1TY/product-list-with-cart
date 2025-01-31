@@ -8,30 +8,55 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   function addProduct(newProduct) {
-    const existingProduct = addedProducts.find(
-      (cartProduct) => cartProduct.name === newProduct.name
-    );
+    setAddedProducts((products) => {
+      const existingProduct = addedProducts.find(
+        (cartProduct) => cartProduct.name === newProduct.name
+      );
 
-    if (existingProduct) return;
-    setAddedProducts((products) => [
-      ...products,
-      { ...newProduct, quantity: 1 },
-    ]);
+      if (existingProduct) {
+        return products;
+      }
+      return [...products, { ...newProduct, quantity: 1 }];
+    });
   }
+
+  function updateProductQuantity(productName, newQuantity) {
+    setAddedProducts((products) =>
+      products.map((product) =>
+        product.name === productName
+          ? { ...product, quantity: newQuantity }
+          : product
+      )
+    );
+  }
+
+  const totalPrice = addedProducts.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
 
   return (
     <>
       <div className="flex flex-col m-6 lg:flex-row lg:items-start lg:my-[5.5rem] md:mx-10 md:gap-8">
         <div>
           <LogoName />
-          <ProductsList addProduct={addProduct} />
+          <ProductsList
+            addProduct={addProduct}
+            updateProductQuantity={updateProductQuantity}
+          />
         </div>
         <ShoppingCart
           addedProducts={addedProducts}
+          totalPrice={totalPrice}
           setIsModalOpen={setIsModalOpen}
         />
       </div>
-      {isModalOpen && <ConfirmationModal addedProducts={addedProducts} />}
+      {isModalOpen && (
+        <ConfirmationModal
+          addedProducts={addedProducts}
+          totalPrice={totalPrice}
+        />
+      )}
     </>
   );
 }
