@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { ProductsList } from './components/productsList/ProductsList';
 import { LogoName } from './components/LogoName';
 import { ShoppingCart } from './components/cart/ShoppingCart';
-// import { ConfirmationModal } from './components/confirmationModal/confirmOrder';
+import { ConfirmationModal } from './components/confirmationModal/confirmOrder';
 export default function App() {
   const [addedProducts, setAddedProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function addProduct(newProduct) {
     const existingProduct = addedProducts.find(
@@ -25,9 +26,12 @@ export default function App() {
           <LogoName />
           <ProductsList addProduct={addProduct} />
         </div>
-        <ShoppingCart addedProducts={addedProducts} />
+        <ShoppingCart
+          addedProducts={addedProducts}
+          setIsModalOpen={setIsModalOpen}
+        />
       </div>
-      {/* <ConfirmationModal /> */}
+      {isModalOpen && <ConfirmationModal addedProducts={addedProducts} />}
     </>
   );
 }
