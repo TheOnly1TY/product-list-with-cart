@@ -3,7 +3,11 @@ import { Product } from './Product';
 import Productdata from '../data.json';
 import { ProductDescription } from './ProductDescription';
 
-export function ProductsList({ addProduct, updateProductQuantity }) {
+export function ProductsList({
+  addProduct,
+  updateProductQuantity,
+  handleDeleteProduct,
+}) {
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
     setAllProducts(Productdata);
@@ -17,6 +21,7 @@ export function ProductsList({ addProduct, updateProductQuantity }) {
             product={product}
             addProduct={addProduct}
             updateProductQuantity={updateProductQuantity}
+            handleDeleteProduct={handleDeleteProduct}
           />
           <ProductDescription product={product} />
         </Product>
@@ -29,12 +34,13 @@ function ProductImageWithButton({
   product,
   addProduct,
   updateProductQuantity,
+  handleDeleteProduct,
 }) {
   const [displayCounter, setDisplayCounter] = useState(false);
-  function handleCounterDisplay() {
-    setDisplayCounter(true);
-    addProduct(product);
-  }
+  // function handleCounterDisplay() {
+  //   setDisplayCounter(true);
+  //   // addProduct(product);
+  // }
 
   return (
     <div className="relative">
@@ -47,31 +53,46 @@ function ProductImageWithButton({
       </figure>
 
       <button
-        onClick={handleCounterDisplay}
+        onClick={() => addProduct(product)}
         className={`absolute top-full left-1/2 transform translate-[-50%] w-40 h-[2.75rem] rounded-full ${!displayCounter ? 'addBtnStyles' : 'bg-[#C73B0F]'}`}
       >
         {displayCounter ? (
           <CounterButton
             product={product}
+            displayCounter={displayCounter}
+            onDisplayCounter={setDisplayCounter}
             updateProductQuantity={updateProductQuantity}
+            handleDeleteProduct={handleDeleteProduct}
           />
         ) : (
-          <AddToCartButton />
+          <AddToCartButton
+            displayCounter={displayCounter}
+            onDisplayCounter={setDisplayCounter}
+          />
         )}
       </button>
     </div>
   );
 }
-function AddToCartButton() {
+function AddToCartButton({ displayCounter, onDisplayCounter }) {
   return (
-    <div className="flex justify-center items-center w-full h-full gap-0.5">
+    <div
+      onClick={() => onDisplayCounter(!displayCounter)}
+      className="flex justify-center items-center w-full h-full gap-0.5"
+    >
       <img src="/images/icon-add-to-cart.svg" alt="add-to-cart_icon" />
       <p className="text-sm text-primary font-semibold">Add to cart</p>
     </div>
   );
 }
 
-function CounterButton({ product, updateProductQuantity }) {
+function CounterButton({
+  product,
+  updateProductQuantity,
+  displayCounter,
+  onDisplayCounter,
+  handleDeleteProduct,
+}) {
   const [count, setCount] = useState(1);
 
   useEffect(() => {
@@ -80,7 +101,12 @@ function CounterButton({ product, updateProductQuantity }) {
 
   // fixing issues of working changing the state back to false after 1
   const handleDecrementCount = () => {
-    setCount((count) => count - 1);
+    if (count <= 1) {
+      onDisplayCounter(() => !displayCounter);
+      handleDeleteProduct(product);
+    } else {
+      setCount((count) => count - 1);
+    }
   };
 
   const handleIncrementCount = () => {

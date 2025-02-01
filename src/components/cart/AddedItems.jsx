@@ -1,15 +1,25 @@
-export function AddedItems({ addedProducts }) {
+export function AddedItems({ addedProducts, setAddedProducts }) {
   return (
     <ul>
       {addedProducts.map((products, id) => (
-        <CartProduct addedProduct={products} key={id} />
+        <CartProduct
+          // addedProducts={addedProducts}
+          addedProduct={products}
+          setAddedProducts={setAddedProducts}
+          key={id}
+        />
       ))}
     </ul>
   );
 }
 
-function CartProduct({ addedProduct }) {
+function CartProduct({ addedProduct, setAddedProducts }) {
   const { name, price, quantity } = addedProduct;
+  const handleDeleteProduct = (delProduct) => {
+    setAddedProducts((addedProduct) =>
+      addedProduct.filter((product) => product.name !== delProduct.name)
+    );
+  };
   return (
     <>
       <li className="flex justify-between items-center">
@@ -27,7 +37,10 @@ function CartProduct({ addedProduct }) {
             </span>
           </p>
         </div>
-        <figure className="grid place-content-center w-[1.125rem] h-[1.125rem] rounded-full border border-[#AD8A85] cursor-pointer">
+        <figure
+          onClick={() => handleDeleteProduct(addedProduct)}
+          className="grid place-content-center w-[1.125rem] h-[1.125rem] rounded-full border border-[#AD8A85] cursor-pointer"
+        >
           <img src="images/icon-remove-item.svg" alt="remove item icon" />
         </figure>
       </li>

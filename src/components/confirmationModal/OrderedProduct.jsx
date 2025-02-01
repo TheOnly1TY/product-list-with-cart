@@ -24,7 +24,7 @@ function ProductReviewModal({ modalProduct }) {
             <h2 className="text-sm text-primary-rose font-semibold">{name}</h2>
             <div className="flex items-center gap-3">
               <p className="text-sm text-red font-semibold">{quantity}x</p>
-              <p className="text-sm text-[#87635A]">@ ${price}</p>
+              <p className="text-sm text-[#87635A]">@ ${price.toFixed(2)}</p>
             </div>
           </div>
         </div>
