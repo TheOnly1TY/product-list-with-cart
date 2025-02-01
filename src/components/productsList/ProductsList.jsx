@@ -7,6 +7,8 @@ export function ProductsList({
   addProduct,
   updateProductQuantity,
   handleDeleteProduct,
+  displayCounter,
+  setDisplayCounter,
 }) {
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
@@ -22,6 +24,10 @@ export function ProductsList({
             addProduct={addProduct}
             updateProductQuantity={updateProductQuantity}
             handleDeleteProduct={handleDeleteProduct}
+            displayCounter={displayCounter[product.name] || false}
+            setDisplayCounter={(state) =>
+              setDisplayCounter((prev) => ({ ...prev, [product.name]: state }))
+            }
           />
           <ProductDescription product={product} />
         </Product>
@@ -35,13 +41,9 @@ function ProductImageWithButton({
   addProduct,
   updateProductQuantity,
   handleDeleteProduct,
+  displayCounter,
+  setDisplayCounter,
 }) {
-  const [displayCounter, setDisplayCounter] = useState(false);
-  // function handleCounterDisplay() {
-  //   setDisplayCounter(true);
-  //   // addProduct(product);
-  // }
-
   return (
     <div className="relative">
       <figure>
@@ -89,28 +91,26 @@ function AddToCartButton({ displayCounter, onDisplayCounter }) {
 function CounterButton({
   product,
   updateProductQuantity,
-  displayCounter,
   onDisplayCounter,
+  displayCounter,
   handleDeleteProduct,
 }) {
   const [count, setCount] = useState(1);
-
   useEffect(() => {
     updateProductQuantity(product.name, count);
   }, [count]);
 
-  // fixing issues of working changing the state back to false after 1
   const handleDecrementCount = () => {
     if (count <= 1) {
-      onDisplayCounter(() => !displayCounter);
+      onDisplayCounter(!displayCounter);
       handleDeleteProduct(product);
     } else {
-      setCount((count) => count - 1);
+      setCount((prevCount) => prevCount - 1);
     }
   };
 
   const handleIncrementCount = () => {
-    setCount((count) => count + 1);
+    setCount((nextCount) => nextCount + 1);
   };
   return (
     <div className="flex justify-between items-center mx-4">

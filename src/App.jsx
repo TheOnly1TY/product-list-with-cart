@@ -7,6 +7,7 @@ import { ConfirmationModal } from './components/confirmationModal/confirmOrder';
 export default function App() {
   const [addedProducts, setAddedProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [displayCounter, setDisplayCounter] = useState({});
 
   const totalPrice = addedProducts.reduce(
     (acc, item) => acc + item.quantity * item.price,
@@ -24,6 +25,7 @@ export default function App() {
       }
       return [...products, { ...newProduct, quantity: 1 }];
     });
+    setDisplayCounter((prev) => ({ ...prev, [newProduct.name]: true }));
   };
 
   const updateProductQuantity = (productName, newQuantity) => {
@@ -37,10 +39,10 @@ export default function App() {
   };
 
   const handleDeleteProduct = (delProduct) => {
-    // resetStates();
     setAddedProducts((addedProduct) =>
       addedProduct.filter((product) => product.name !== delProduct.name)
     );
+    setDisplayCounter((prev) => ({ ...prev, [delProduct.name]: false }));
   };
 
   return (
@@ -52,6 +54,8 @@ export default function App() {
             addProduct={addProduct}
             handleDeleteProduct={handleDeleteProduct}
             updateProductQuantity={updateProductQuantity}
+            displayCounter={displayCounter}
+            setDisplayCounter={setDisplayCounter}
           />
         </div>
         <ShoppingCart
@@ -59,7 +63,6 @@ export default function App() {
           totalPrice={totalPrice}
           handleDeleteProduct={handleDeleteProduct}
           setIsModalOpen={setIsModalOpen}
-          setAddedProducts={setAddedProducts}
         />
       </div>
       {isModalOpen && (

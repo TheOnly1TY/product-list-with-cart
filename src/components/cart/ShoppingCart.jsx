@@ -6,7 +6,7 @@ export function ShoppingCart({
   addedProducts,
   setIsModalOpen,
   totalPrice,
-  setAddedProducts,
+  handleDeleteProduct,
 }) {
   return (
     <div className="w-full min-h-[299px] bg-white rounded-[12px] p-6 lg:max-w-[384px]">
@@ -17,7 +17,7 @@ export function ShoppingCart({
         <>
           <AddedItems
             addedProducts={addedProducts}
-            setAddedProducts={setAddedProducts}
+            handleDeleteProduct={handleDeleteProduct}
           />
           <OrderSummary
             setIsModalOpen={setIsModalOpen}

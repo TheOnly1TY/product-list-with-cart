@@ -1,11 +1,10 @@
-export function AddedItems({ addedProducts, setAddedProducts }) {
+export function AddedItems({ addedProducts, handleDeleteProduct }) {
   return (
     <ul>
       {addedProducts.map((products, id) => (
         <CartProduct
-          // addedProducts={addedProducts}
           addedProduct={products}
-          setAddedProducts={setAddedProducts}
+          handleDeleteProduct={handleDeleteProduct}
           key={id}
         />
       ))}
@@ -13,13 +12,9 @@ export function AddedItems({ addedProducts, setAddedProducts }) {
   );
 }
 
-function CartProduct({ addedProduct, setAddedProducts }) {
+function CartProduct({ addedProduct, handleDeleteProduct }) {
   const { name, price, quantity } = addedProduct;
-  const handleDeleteProduct = (delProduct) => {
-    setAddedProducts((addedProduct) =>
-      addedProduct.filter((product) => product.name !== delProduct.name)
-    );
-  };
+
   return (
     <>
       <li className="flex justify-between items-center">
