@@ -5,7 +5,7 @@ import { OrderSummary } from './OrderSummary';
 export function ShoppingCart({
   addedProducts,
   setIsModalOpen,
-  totalPrice,
+  calculateTotalPrice,
   handleDeleteProduct,
 }) {
   return (
@@ -21,7 +21,7 @@ export function ShoppingCart({
           />
           <OrderSummary
             setIsModalOpen={setIsModalOpen}
-            totalPrice={totalPrice}
+            calculateTotalPrice={calculateTotalPrice}
           />
         </>
       ) : (

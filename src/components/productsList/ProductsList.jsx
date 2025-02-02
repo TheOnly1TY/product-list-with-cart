@@ -6,7 +6,6 @@ import { ProductDescription } from './ProductDescription';
 export function ProductsList({
   addProduct,
   updateProductQuantity,
-  handleDeleteProduct,
   displayCounter,
   setDisplayCounter,
 }) {
@@ -23,7 +22,6 @@ export function ProductsList({
             product={product}
             addProduct={addProduct}
             updateProductQuantity={updateProductQuantity}
-            handleDeleteProduct={handleDeleteProduct}
             displayCounter={displayCounter[product.name] || false}
             setDisplayCounter={(state) =>
               setDisplayCounter((prev) => ({ ...prev, [product.name]: state }))
@@ -40,7 +38,6 @@ function ProductImageWithButton({
   product,
   addProduct,
   updateProductQuantity,
-  handleDeleteProduct,
   displayCounter,
   setDisplayCounter,
 }) {
@@ -62,9 +59,8 @@ function ProductImageWithButton({
           <CounterButton
             product={product}
             displayCounter={displayCounter}
-            onDisplayCounter={setDisplayCounter}
+            setDisplayCounter={setDisplayCounter}
             updateProductQuantity={updateProductQuantity}
-            handleDeleteProduct={handleDeleteProduct}
           />
         ) : (
           <AddToCartButton
@@ -76,6 +72,7 @@ function ProductImageWithButton({
     </div>
   );
 }
+
 function AddToCartButton({ displayCounter, onDisplayCounter }) {
   return (
     <div
@@ -88,26 +85,15 @@ function AddToCartButton({ displayCounter, onDisplayCounter }) {
   );
 }
 
-function CounterButton({
-  product,
-  updateProductQuantity,
-  onDisplayCounter,
-  displayCounter,
-  handleDeleteProduct,
-}) {
+function CounterButton({ product, updateProductQuantity }) {
   const [count, setCount] = useState(1);
   useEffect(() => {
     updateProductQuantity(product.name, count);
   }, [count]);
 
-  const handleDecrementCount = () => {
-    if (count <= 1) {
-      onDisplayCounter(!displayCounter);
-      handleDeleteProduct(product);
-    } else {
-      setCount((prevCount) => prevCount - 1);
-    }
-  };
+  function handleDecrementCount() {
+    count >= 2 ? setCount((prevCount) => prevCount - 1) : null;
+  }
 
   const handleIncrementCount = () => {
     setCount((nextCount) => nextCount + 1);

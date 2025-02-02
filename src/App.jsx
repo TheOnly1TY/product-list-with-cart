@@ -9,10 +9,9 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [displayCounter, setDisplayCounter] = useState({});
 
-  const totalPrice = addedProducts.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
+  const calculateTotalPrice = addedProducts
+    .reduce((acc, item) => acc + item.quantity * item.price, 0)
+    .toFixed(2);
 
   const addProduct = (newProduct) => {
     setAddedProducts((products) => {
@@ -45,6 +44,12 @@ export default function App() {
     setDisplayCounter((prev) => ({ ...prev, [delProduct.name]: false }));
   };
 
+  const reset = () => {
+    setAddedProducts([]);
+    setDisplayCounter({});
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <div className="flex flex-col m-6 lg:flex-row lg:items-start lg:my-[5.5rem] md:mx-10 md:gap-8">
@@ -52,7 +57,6 @@ export default function App() {
           <LogoName />
           <ProductsList
             addProduct={addProduct}
-            handleDeleteProduct={handleDeleteProduct}
             updateProductQuantity={updateProductQuantity}
             displayCounter={displayCounter}
             setDisplayCounter={setDisplayCounter}
@@ -60,7 +64,7 @@ export default function App() {
         </div>
         <ShoppingCart
           addedProducts={addedProducts}
-          totalPrice={totalPrice}
+          calculateTotalPrice={calculateTotalPrice}
           handleDeleteProduct={handleDeleteProduct}
           setIsModalOpen={setIsModalOpen}
         />
@@ -68,7 +72,8 @@ export default function App() {
       {isModalOpen && (
         <ConfirmationModal
           addedProducts={addedProducts}
-          totalPrice={totalPrice}
+          calculateTotalPrice={calculateTotalPrice}
+          reset={reset}
         />
       )}
     </>
