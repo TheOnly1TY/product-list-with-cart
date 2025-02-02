@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Product } from './Product';
 import Productdata from '../data.json';
 import { ProductDescription } from './ProductDescription';
+import { useWindowWidth } from '../../customHooks/useWindowWidth';
 
 export function ProductsList({
   addProduct,
@@ -41,11 +42,13 @@ function ProductImageWithButton({
   displayCounter,
   setDisplayCounter,
 }) {
+  const screenSizes = useWindowWidth();
+
   return (
     <div className="relative">
       <figure>
         <img
-          src={product.image.mobile}
+          src={product.image[screenSizes]}
           className={`w-full rounded-[0.5rem] ${displayCounter && 'border-2 border-red'}`}
           alt="product img"
         />
