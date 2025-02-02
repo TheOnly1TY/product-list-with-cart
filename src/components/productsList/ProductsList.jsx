@@ -45,7 +45,7 @@ function ProductImageWithButton({
     <div className="relative">
       <figure>
         <img
-          src={product.image.desktop}
+          src={product.image.mobile}
           className={`w-full rounded-[0.5rem] ${displayCounter && 'border-2 border-red'}`}
           alt="product img"
         />
@@ -77,10 +77,10 @@ function AddToCartButton({ displayCounter, onDisplayCounter }) {
   return (
     <div
       onClick={() => onDisplayCounter(!displayCounter)}
-      className="flex justify-center items-center w-full h-full gap-0.5"
+      className="flex justify-center items-center w-full h-full gap-0.5 hover:text-red"
     >
       <img src="/images/icon-add-to-cart.svg" alt="add-to-cart_icon" />
-      <p className="text-sm text-primary font-semibold">Add to cart</p>
+      <p className="text-sm text-primary font-semibold ">Add to cart</p>
     </div>
   );
 }
@@ -100,12 +100,42 @@ function CounterButton({ product, updateProductQuantity }) {
   };
   return (
     <div className="flex justify-between items-center mx-4">
-      <span className="circle" onClick={handleDecrementCount}>
-        <img src="images/icon-decrement-quantity.svg" alt="decrement icon" />
+      <span
+        className="group circle hover:bg-white "
+        onClick={handleDecrementCount}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="10"
+          height="2"
+          fill="none"
+          viewBox="0 0 10 2"
+        >
+          <path
+            className="fill-white group-hover:fill-red"
+            d="M0 .375h10v1.25H0V.375Z"
+          />
+        </svg>
       </span>
+
       <p className="text-sm text-white font-semibold">{count}</p>
-      <span className="circle" onClick={handleIncrementCount}>
-        <img src="images/icon-increment-quantity.svg" alt="increment icon" />
+
+      <span
+        className="group circle hover:bg-white "
+        onClick={handleIncrementCount}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="10"
+          height="10"
+          fill="none"
+          viewBox="0 0 10 10"
+        >
+          <path
+            className="fill-white group-hover:fill-red"
+            d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"
+          />
+        </svg>
       </span>
     </div>
   );

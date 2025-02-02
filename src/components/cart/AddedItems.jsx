@@ -34,9 +34,20 @@ function CartProduct({ addedProduct, handleDeleteProduct }) {
         </div>
         <figure
           onClick={() => handleDeleteProduct(addedProduct)}
-          className="grid place-content-center w-[1.125rem] h-[1.125rem] rounded-full border border-[#AD8A85] cursor-pointer"
+          className="group grid place-content-center w-[1.125rem] h-[1.125rem] rounded-full border border-[#AD8A85] hover:border-primary-rose hover:stroke-primary-rose  cursor-pointer"
         >
-          <img src="images/icon-remove-item.svg" alt="remove item icon" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="10"
+            fill="none"
+            viewBox="0 0 10 10"
+          >
+            <path
+              className="fill-[#CAAFA7] group-hover:fill-primary-rose"
+              d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"
+            />
+          </svg>
         </figure>
       </li>
       <div className="line mt-4"></div>
