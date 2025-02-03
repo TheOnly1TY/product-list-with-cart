@@ -20,7 +20,7 @@ export function ProductsList({
       {allProducts.map((product, i) => (
         <Product key={i}>
           <ProductImageWithButton
-            product={product}
+            productIMG={product.image}
             addProduct={addProduct}
             updateProductQuantity={updateProductQuantity}
             displayCounter={displayCounter[product.name] || false}
@@ -36,7 +36,7 @@ export function ProductsList({
 }
 
 function ProductImageWithButton({
-  product,
+  productIMG,
   addProduct,
   updateProductQuantity,
   displayCounter,
@@ -48,7 +48,7 @@ function ProductImageWithButton({
     <div className="relative">
       <figure>
         <img
-          src={product.image[screenSizes]}
+          src={productIMG[screenSizes]}
           className={`w-full rounded-[0.5rem] ${displayCounter && 'border-2 border-red'}`}
           alt="product img"
         />
