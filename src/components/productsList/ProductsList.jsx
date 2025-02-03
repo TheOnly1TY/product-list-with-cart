@@ -56,7 +56,7 @@ function ProductImageWithButton({
 
       <button
         onClick={() => addProduct(product)}
-        className={`absolute top-full left-1/2 transform translate-[-50%] w-40 h-[2.75rem] rounded-full ${!displayCounter ? 'addBtnStyles' : 'bg-[#C73B0F]'}`}
+        className={`absolute top-full left-1/2 transform translate-[-50%] w-40 h-[2.75rem] rounded-full ${!displayCounter ? 'addBtnStyles' : 'bg-red'}`}
       >
         {displayCounter ? (
           <CounterButton
@@ -80,10 +80,10 @@ function AddToCartButton({ displayCounter, onDisplayCounter }) {
   return (
     <div
       onClick={() => onDisplayCounter(!displayCounter)}
-      className="flex justify-center items-center w-full h-full gap-0.5 hover:text-red"
+      className="flex justify-center items-center w-full h-full gap-0.5 text-primary-rose hover:text-red duration-100"
     >
       <img src="/images/icon-add-to-cart.svg" alt="add-to-cart_icon" />
-      <p className="text-sm text-primary font-semibold ">Add to cart</p>
+      <p className="text-sm font-semibold">Add to cart</p>
     </div>
   );
 }

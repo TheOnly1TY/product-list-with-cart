@@ -19,22 +19,22 @@ function CartProduct({ addedProduct, handleDeleteProduct }) {
     <>
       <li className="flex justify-between items-center">
         <div className="flex flex-col gap-2">
-          <h3 className="text-[0.875rem] text-[#260F08] font-semibold">
-            {name}
-          </h3>
+          <h3 className="text-sm text-primary-rose font-semibold">{name}</h3>
           <p className="text-sm">
-            <span className="text-[#C73B0F] font-bold mr-2.5">
+            <span className="text-red font-bold mr-2.5">
               {addedProduct.quantity}x
             </span>
-            <span className="text-[#87635A] mr-1.5">@ ${price.toFixed(2)}</span>
-            <span className="text-[#87635A] font-bold">
+            <span className="text-muted-rose mr-1.5">
+              @ ${price.toFixed(2)}
+            </span>
+            <span className="text-muted-rose font-bold">
               ${(quantity * price).toFixed(2)}
             </span>
           </p>
         </div>
         <figure
           onClick={() => handleDeleteProduct(addedProduct)}
-          className="group grid place-content-center w-[1.125rem] h-[1.125rem] rounded-full border border-[#AD8A85] hover:border-primary-rose hover:stroke-primary-rose  cursor-pointer"
+          className="group grid place-content-center w-[1.125rem] h-[1.125rem] rounded-full border border-dusty-rose hover:border-primary-rose hover:stroke-primary-rose  cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

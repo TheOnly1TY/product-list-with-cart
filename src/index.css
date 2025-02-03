@@ -4,12 +4,16 @@
 
 @theme {
   --color-primary-rose: #260f08;
+  --color-muted-rose: #87635a;
+  --color-dusty-rose: #ad8a85;
+  --color-soft-rose: #f5eeec;
+  --color-pale-rose: #fcf8f6;
   --color-red: #c73b0f;
 }
 
 body {
   font-family: 'Red Hat Text', serif;
-  background-color: #fcf8f6;
+  background-color: var(--color-pale-rose);
 }
 
 .circle {
@@ -17,13 +21,9 @@ body {
 }
 
 .addBtnStyles {
-  background-color: white;
-  border: 1px solid #c73b0f;
-  cursor: pointer;
+  @apply bg-white border border-dusty-rose hover:border-red cursor-pointer;
 }
 
 .line {
-  width: 100%;
-  height: 1px;
-  background-color: #f5eeec;
+  @apply w-full h-[1px] bg-soft-rose;
 }

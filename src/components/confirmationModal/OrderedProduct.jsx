@@ -1,7 +1,7 @@
 // still wanting to implement min height media query
 export function OrderedProduct({ addedProducts }) {
   return (
-    <div className="max-h-[150px] md:max-h-[150px] overflow-y-scroll">
+    <div className="max-h-[150px] md:max-h-[150px] overflow-y-scroll ">
       {addedProducts.map((modalProduct, i) => (
         <ProductReviewModal modalProduct={modalProduct} key={i} />
       ))}
@@ -24,7 +24,7 @@ function ProductReviewModal({ modalProduct }) {
             <h2 className="text-sm text-primary-rose font-semibold">{name}</h2>
             <div className="flex items-center gap-3">
               <p className="text-sm text-red font-semibold">{quantity}x</p>
-              <p className="text-sm text-[#87635A]">@ ${price.toFixed(2)}</p>
+              <p className="text-sm text-muted-rose">@ ${price.toFixed(2)}</p>
             </div>
           </div>
         </div>

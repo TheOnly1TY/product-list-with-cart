@@ -7,7 +7,7 @@ export function EmptyCart() {
           alt="empty-cart_illustration"
         />
       </figure>
-      <p className="text-sm text-[#87635A] font-semibold">
+      <p className="text-sm text-muted-rose font-semibold">
         Your added items will appear here
       </p>
     </div>
