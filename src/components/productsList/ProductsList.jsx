@@ -42,6 +42,7 @@ function ProductImageWithButton({
   displayCounter,
   setDisplayCounter,
 }) {
+  // const { image } = product;
   const screenSizes = useWindowWidth();
 
   return (
@@ -78,13 +79,13 @@ function ProductImageWithButton({
 
 function AddToCartButton({ displayCounter, onDisplayCounter }) {
   return (
-    <div
+    <button
       onClick={() => onDisplayCounter(!displayCounter)}
-      className="flex justify-center items-center w-full h-full gap-0.5 text-primary-rose hover:text-red duration-100"
+      className="flex justify-center items-center w-full h-full gap-0.5 text-primary-rose hover:text-red duration-100 cursor-pointer"
     >
       <img src="/images/icon-add-to-cart.svg" alt="add-to-cart_icon" />
       <p className="text-sm font-semibold">Add to cart</p>
-    </div>
+    </button>
   );
 }
 
@@ -103,7 +104,7 @@ function CounterButton({ product, updateProductQuantity }) {
   };
   return (
     <div className="flex justify-between items-center mx-4">
-      <span
+      <button
         className="group circle hover:bg-white "
         onClick={handleDecrementCount}
       >
@@ -119,11 +120,11 @@ function CounterButton({ product, updateProductQuantity }) {
             d="M0 .375h10v1.25H0V.375Z"
           />
         </svg>
-      </span>
+      </button>
 
       <p className="text-sm text-white font-semibold">{count}</p>
 
-      <span
+      <button
         className="group circle hover:bg-white "
         onClick={handleIncrementCount}
       >
@@ -139,7 +140,7 @@ function CounterButton({ product, updateProductQuantity }) {
             d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"
           />
         </svg>
-      </span>
+      </button>
     </div>
   );
 }
